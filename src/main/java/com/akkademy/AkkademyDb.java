@@ -5,8 +5,8 @@ import akka.actor.Status;
 import akka.event.Logging;
 import akka.event.LoggingAdapter;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by eric on 21/07/2017.
@@ -15,13 +15,7 @@ public class AkkademyDb extends AbstractActor {
 
     protected final LoggingAdapter log = Logging.getLogger(context().system(), this);
 
-    protected final Map<String, Object> map = new HashMap<>();
-
-    public AkkademyDb() {
-    }
-
-    public AkkademyDb(String nothing) {
-    }
+    protected final Map<String, Object> map = new ConcurrentHashMap<>();
 
     @Override
     public Receive createReceive() {
