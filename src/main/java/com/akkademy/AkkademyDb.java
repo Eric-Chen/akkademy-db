@@ -25,8 +25,9 @@ public class AkkademyDb extends AbstractActor {
                     map.put(message.getKey(), message.getValue());
                 })
                 .match(GetRequest.class, message -> {
-                    Object value = map.get(message.key);
-                    Object result = value != null ? value : new Status.Failure(new KeyNotFoundException(message.key));
+                    log.info("Received Get request – key: {} ", message.getKey());
+                    Object value = map.get(message.getKey());
+                    Object result = value != null ? value : new Status.Failure(new KeyNotFoundException(message.getKey()));
                     sender().tell(result, self());
                 })
                 .matchAny(o -> log.info("received unknown message"))
